@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento Financiero</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Seguimiento Financiero</h1>
+        
+        <!-- Formulario de registro de ingresos/gastos -->
+        <form @submit.prevent="addTransaction">
+            <input type="text" v-model="description" placeholder="Descripción" required>
+            <input type="number" v-model="amount" placeholder="Monto" required>
+            <select v-model="type">
+                <option value="ingreso">Ingreso</option>
+                <option value="gasto">Gasto</option>
+            </select>
+            <button type="submit">Agregar</button>
+        </form>
+        
+        <!-- Historial de transacciones -->
+        <h2>Historial de Transacciones</h2>
+        <ul>
+            <li v-for="transaction in transactions" :key="transaction.id">
+                {{ transaction.description }} - {{ transaction.amount }} - {{ transaction.type }}
+            </li>
+        </ul>
+        
+        <!-- Gráfica de seguimiento -->
+        <h2>Balance de Dinero</h2>
+        <canvas id="expenseChart"></canvas>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
